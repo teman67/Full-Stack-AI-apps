@@ -1,0 +1,116 @@
+# Prometheus configuration for monitoring Full-Stack AI Apps
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "rules/*.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+scrape_configs:
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Node exporter for system metrics
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  # Full-Stack AI Apps
+  - job_name: 'full-stack-ai'
+    static_configs:
+      - targets: ['ai-app:8000']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # AWS CloudWatch metrics
+  - job_name: 'aws-cloudwatch'
+    ec2_sd_configs:
+      - region: us-east-1
+        port: 9100
+    relabel_configs:
+      - source_labels: [__meta_ec2_tag_Name]
+        target_label: instance_name
+      - source_labels: [__meta_ec2_instance_id]
+        target_label: instance_id
+
+  # Kubernetes pods
+  - job_name: 'kubernetes-pods'
+    kubernetes_sd_configs:
+      - role: pod
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+        action: keep
+        regex: true
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+        action: replace
+        target_label: __metrics_path__
+        regex: (.+)
+      - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+        action: replace
+        regex: ([^:]+)(?::\d+)?;(\d+)
+        replacement: $1:$2
+        target_label: __address__
+      - action: labelmap
+        regex: __meta_kubernetes_pod_label_(.+)
+      - source_labels: [__meta_kubernetes_namespace]
+        action: replace
+        target_label: kubernetes_namespace
+      - source_labels: [__meta_kubernetes_pod_name]
+        action: replace
+        target_label: kubernetes_pod_name
+
+  # Bedrock API metrics
+  - job_name: 'aws-bedrock'
+    static_configs:
+      - targets: ['bedrock-exporter:9200']
+    scrape_interval: 60s
+
+  # SageMaker metrics
+  - job_name: 'aws-sagemaker'
+    static_configs:
+      - targets: ['sagemaker-exporter:9201']
+    scrape_interval: 60s
+
+  # GCP AI Platform metrics
+  - job_name: 'gcp-ai-platform'
+    static_configs:
+      - targets: ['gcp-exporter:9202']
+    scrape_interval: 60s
+
+  # Azure OpenAI metrics
+  - job_name: 'azure-openai'
+    static_configs:
+      - targets: ['azure-exporter:9203']
+    scrape_interval: 60s
+
+  # Vector database metrics (Pinecone/Chroma)
+  - job_name: 'vector-db'
+    static_configs:
+      - targets: ['vector-db-exporter:9204']
+    scrape_interval: 30s
+
+  # RAG system metrics
+  - job_name: 'rag-system'
+    static_configs:
+      - targets: ['rag-metrics:9205']
+    scrape_interval: 30s
+
+  # MCP server metrics
+  - job_name: 'mcp-server'
+    static_configs:
+      - targets: ['mcp-metrics:9206']
+    scrape_interval: 30s
+
+  # AI Agents metrics
+  - job_name: 'ai-agents'
+    static_configs:
+      - targets: ['agents-metrics:9207']
+    scrape_interval: 30s

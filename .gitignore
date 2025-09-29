@@ -1,0 +1,233 @@
+# Full-Stack AI Apps - .gitignore
+
+# === Environment and Configuration ===
+.env
+.env.local
+.env.*.local
+config/secrets.yml
+config/production.yml
+
+# === Dependencies ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+# === IDE and Editor Files ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# === Logs and Databases ===
+*.log
+logs/
+*.sqlite
+*.sqlite3
+*.db
+
+# === AI/ML Artifacts ===
+models/
+checkpoints/
+data/raw/
+data/processed/
+*.pkl
+*.joblib
+*.h5
+*.onnx
+wandb/
+mlruns/
+artifacts/
+.mlflow/
+
+# === Vector Database Files ===
+chroma_db/
+pinecone_cache/
+weaviate_data/
+*.faiss
+*.index
+
+# === Cloud Provider Files ===
+# AWS
+.aws/
+aws-exports.js
+
+# GCP
+gcp-service-account.json
+*.json
+
+# Azure
+azure-credentials.json
+
+# === Docker ===
+.docker/
+docker-compose.override.yml
+
+# === Kubernetes ===
+secrets.yaml
+*-secret.yaml
+
+# === Terraform ===
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+terraform.tfvars
+terraform.tfvars.json
+
+# === Testing ===
+.coverage
+.pytest_cache/
+.tox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+htmlcov/
+
+# === Build Output ===
+.next/
+out/
+dist/
+build/
+*.tgz
+*.tar.gz
+
+# === OS Generated Files ===
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# === Temporary Files ===
+*.tmp
+*.temp
+tmp/
+temp/
+.temp/
+
+# === SSL Certificates ===
+*.pem
+*.key
+*.crt
+*.csr
+ssl/
+
+# === Backup Files ===
+*.bak
+*.backup
+*~
+
+# === JetBrains IDEs ===
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# === VS Code ===
+.vscode/
+*.code-workspace
+
+# === Vim ===
+*.swp
+*.swo
+
+# === Emacs ===
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# === Python Virtual Environments ===
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# === Jupyter Notebook ===
+.ipynb_checkpoints
+
+# === pyenv ===
+.python-version
+
+# === Celery ===
+celerybeat-schedule
+celerybeat.pid
+
+# === SageMath ===
+*.sage.py
+
+# === Environments ===
+.spyderproject
+.spyproject
+
+# === Rope project settings ===
+.ropeproject
+
+# === mkdocs documentation ===
+/site
+
+# === mypy ===
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# === Pyre type checker ===
+.pyre/
+
+# === pytype static type analyzer ===
+.pytype/
+
+# === profiling data ===
+.prof
+
+# === Production secrets ===
+production-secrets/
+secrets/
+keys/
+
+# === Large files and datasets ===
+*.zip
+*.rar
+*.7z
+*.csv
+datasets/
+large-files/
